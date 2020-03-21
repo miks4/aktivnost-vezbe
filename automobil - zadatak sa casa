@@ -1,0 +1,112 @@
+#include <iostream>
+#include <cstdlib>
+#include <cstring>
+
+using namespace std;
+
+enum TIP_menjac{AUTOMATIK,MANUELNI};
+enum SKOLJKA_boja{PLAVA,CRVENA,ZELENA};
+enum STANJE_AUTA{UGASEN,UPALJEN,POKVAREN};
+
+class Menjac{
+private:
+    int brBrzina;
+    TIP_menjac tip;
+public:
+    Menjac(){
+    brBrzina = 3;
+    tip = MANUELNI;
+    }
+
+    Menjac(int brbr,TIP_menjac tp){
+    brBrzina = brbr;
+    tip = tp;
+    }
+
+    Menjac(const Menjac &menjacZaKopiju){
+        brBrzina = menjacZaKopiju.brBrzina;
+        tip = menjacZaKopiju.tip;
+    }
+
+    bool set_brBrzina(int brr){
+        bool uspesno;
+        if(brr > 0 && brr < 7){
+            brBrzina = brr;
+            uspesno = true;
+        }
+        else{
+            uspesno = false;
+        }
+        return uspesno;
+    }
+    void set_tip(TIP_menjac tp){
+
+        tip = tp;
+    }
+
+    int get_brBrzina() const{
+    return brBrzina;
+    }
+
+    TIP_menjac getTip() const{
+        return tip;
+    }
+};
+class Skoljka{
+private:
+    SKOLJKA_boja boja;
+public:
+    Skoljka(){
+        boja = PLAVA;
+    }
+
+    Skoljka(SKOLJKA_boja bj){
+        boja = bj;
+    }
+
+    Skoljka(const Skoljka &skoljkakopija){
+        boja = skoljkakopija.boja;
+    }
+
+    SKOLJKA_boja get_boja(){
+    return boja;
+    }
+
+    void set_boja(SKOLJKA_boja boj){
+        boja = boj;
+    }
+
+};
+class Automobil{
+private:
+    Menjac m;
+    Skoljka s;
+    STANJE_AUTA stanje;
+    int trntBR;
+public:
+
+    Automobil():m(),s(){
+        stanje = UGASEN;
+
+    }
+
+    Automobil(STANJE_AUTA st,int trnt,int brBrzina,TIP_menjac tip,SKOLJKA_boja boja):m(brBrzina,tip),s(boja){
+        stanje = st;
+        trntBR = trnt;
+    }
+
+    Automobil(const Automobil &Automobilkopija){
+        stanje = Automobilkopija.stanje;
+        trntBR = Automobilkopija.trntBR;
+    }
+    bool povecajBrzinu(){
+        bool povecano = false;
+        int temp;
+        temp = trntBR;
+        if(trntBR <= m.get_brBrzina()){
+            trntBR ++;
+            povecano = true;
+        }
+        return povecano;
+    }
+}
