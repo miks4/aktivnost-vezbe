@@ -109,4 +109,80 @@ public:
         }
         return povecano;
     }
+     bool smanjiBrzinu(){
+        bool smanjeno = false;
+        int temp;
+        temp = trntBR;
+        if(trntBR > 0){
+            trntBR--;
+            smanjeno = true;
+        }
+        return smanjeno;
+    }
+    bool upali(){
+        bool upaljen = false;
+        if(stanje != POKVAREN){
+            povecajBrzinu();
+            stanje = UPALJEN;
+            upaljen = true;
+        }
+        return upaljen;
+    }
 
+    bool ugasi(){
+        bool ugasen = false;
+        if(stanje == UPALJEN){
+            smanjiBrzinu();
+            trntBR = 0;
+            stanje = UGASEN;
+            ugasen = true;
+        }
+        return ugasen;
+
+    }
+    bool pokvari(){
+        stanje = POKVAREN;
+        return true;
+    }
+
+    bool popravi(){
+        if(stanje == POKVAREN){
+            povecajBrzinu();
+            stanje = UPALJEN;
+            return true;
+        }
+        return false;
+    }
+
+};
+int main()
+{
+    string menjac = "mauelni";
+    string boja = "plava";
+    Menjac obj1();
+    Menjac obj2(3,MANUELNI);
+    Menjac obj3(obj2);
+    Menjac obj4;
+    obj4.set_brBrzina(3);
+    obj4.set_tip(MANUELNI);
+    obj4.get_brBrzina();
+    obj4.getTip();
+
+    Skoljka obj5();
+    Skoljka obj6(PLAVA);
+    Skoljka obj7(obj6);
+    Skoljka obj8;
+    obj8.set_boja(PLAVA);
+    obj8.get_boja();
+
+    Automobil obj9();
+    Automobil obj10(UGASEN,5,3,MANUELNI,PLAVA);
+    Automobil obj11(obj10);
+    Automobil obj12;
+    obj12.povecajBrzinu();
+    obj12.smanjiBrzinu();
+    obj12.upali();
+    obj12.ugasi();
+
+    return 0;
+}
