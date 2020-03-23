@@ -1,0 +1,46 @@
+#include <iostream>
+
+using namespace std;
+enum STANJE{UPALJENA,ISKLJUCENA,POKVARENA};
+
+class Rerna{
+private:
+    STANJE stanje;
+    int temperatura;
+public:
+    Rerna(){
+        stanje = ISKLJUCENA;
+        temperatura = temp;
+    }
+    Rerna(STANJE st,int temp){
+        stanje = st;
+        temperatura = temp;
+    }
+    Rerna(const Rerna &kopijaZaRernu){
+        stanje = kopijaZaRernu.stanje;
+        temperatura = kopijaZaRernu.temperatura;
+    }
+    void set_stanje(STANJE st){
+        stanje = st;
+    }
+    bool set_temperatura(int temp){
+        if(0 < temp && temp < 221){
+            temperatura = temp;
+            return true;
+        }
+        return false;
+    }
+    
+    STANJE get_stanje()const{
+    return stanje;
+    }
+    
+    int get_temperatura()const{
+        return temperatura;
+    }
+};
+int main()
+{
+    
+    return 0;
+}
