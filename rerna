@@ -31,8 +31,24 @@ public:
         return false;
     }
     
-    STANJE get_stanje()const{
-    return stanje;
+     string get_stanje()const{
+        string temp;
+    switch(stanje){
+    case 1:
+        temp = "upaljena";
+        break;
+    case 2:
+        temp = "iskljucena";
+        break;
+    case 3:
+        temp = "pokvarena";
+        break;
+    default:
+        temp = "neodredjeno";
+        break;
+
+        }
+        return temp;
     }
     
     int get_temperatura()const{
