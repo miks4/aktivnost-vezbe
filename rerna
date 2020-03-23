@@ -54,6 +54,41 @@ public:
     int get_temperatura()const{
         return temperatura;
     }
+     bool pojacajTemp(){
+        if(temperatura < 201){
+            temp += 20;
+            return true;
+        }
+        return false;
+    }
+    bool smanjiTemp(){
+        if(temperatura > 19){
+            temp -=20;
+            return true;
+        }
+        return false;
+    }
+    bool ukljuci(){
+        if(stanje == ISKLJUCENA){
+            if(temperatura == 0){
+                    pojacajTemp();
+            }
+                stanje = UPALJENA;
+            return true;
+            
+        }
+        return false;
+    }
+    bool iskljuci(){
+        if(stanje == UPALJENA){
+            while(temperatura != 0){
+                smanjiTemp();
+            }
+            stanje = ISKLJUCENA;
+            return true;
+        }
+        return false;
+    }
 };
 int main()
 {
