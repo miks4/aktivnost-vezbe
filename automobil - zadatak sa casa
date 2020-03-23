@@ -157,8 +157,7 @@ public:
 };
 int main()
 {
-    string menjac = "mauelni";
-    string boja = "plava";
+    
     Menjac obj1();
     Menjac obj2(3,MANUELNI);
     Menjac obj3(obj2);
@@ -183,6 +182,8 @@ int main()
     obj12.smanjiBrzinu();
     obj12.upali();
     obj12.ugasi();
+    obj12.pokvari();
+    obj12.popravi();
 
     return 0;
 }
