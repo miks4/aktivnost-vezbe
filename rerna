@@ -1,7 +1,9 @@
 #include <iostream>
+#include <cstring>
+
 
 using namespace std;
-enum STANJE{UPALJENA,ISKLJUCENA,POKVARENA};
+enum STANJE{ISKLJUCENA=1,UPALJENA,POKVARENA};
 
 class Rerna{
 private:
@@ -10,7 +12,7 @@ private:
 public:
     Rerna(){
         stanje = ISKLJUCENA;
-        temperatura = temp;
+        temperatura = 0;
     }
     Rerna(STANJE st,int temp){
         stanje = st;
@@ -24,21 +26,24 @@ public:
         stanje = st;
     }
     bool set_temperatura(int temp){
-        if(0 < temp && temp < 221){
+        if(0 <= temp && temp < 221){
             temperatura = temp;
             return true;
         }
         return false;
     }
-    
-     string get_stanje()const{
+
+    string get_stanje()const{
         string temp;
+
+
+
     switch(stanje){
     case 1:
-        temp = "upaljena";
+        temp = "iskljucena";
         break;
     case 2:
-        temp = "iskljucena";
+        temp = "upaljena";
         break;
     case 3:
         temp = "pokvarena";
@@ -50,20 +55,27 @@ public:
         }
         return temp;
     }
-    
+
     int get_temperatura()const{
         return temperatura;
     }
-     bool pojacajTemp(){
+    bool pojacajTemp(){
         if(temperatura < 201){
-            temp += 20;
+            temperatura += 20;
+            stanje = UPALJENA;
             return true;
         }
         return false;
     }
     bool smanjiTemp(){
         if(temperatura > 19){
-            temp -=20;
+            temperatura -=20;
+            if(temperatura > 0){
+                stanje = UPALJENA;
+            }
+            else{
+                stanje = ISKLJUCENA;
+            }
             return true;
         }
         return false;
@@ -75,7 +87,7 @@ public:
             }
                 stanje = UPALJENA;
             return true;
-            
+
         }
         return false;
     }
@@ -89,9 +101,114 @@ public:
         }
         return false;
     }
+    bool popravi(){
+        if(stanje == POKVARENA){
+            stanje = ISKLJUCENA;
+            temperatura = 0;
+            return true;
+        }
+        return false;
+    }
+    bool pokvari(){
+        if(stanje != POKVARENA){
+        stanje = POKVARENA;
+        temperatura = 0;
+        return true;
+        }
+        return false;
+    }
 };
+void ispisiRernu(const Rerna &r){
+    cout<<"RERNA:"<<endl;
+    cout<<"Stanje:"<<r.get_stanje()<<endl;
+    cout<<"Temp:"<<r.get_temperatura()<<endl;
+}
+
+int meni(){
+    int i;
+    cout<<"1.povecaj temp"<<endl;
+    cout<<"2.smanji temp"<<endl;
+    cout<<"3.ukljuci"<<endl;
+    cout<<"4.iskljuci"<<endl;
+    cout<<"5.popravi"<<endl;
+    cout<<"6.pokvari"<<endl;
+    cout<<"7.ispis"<<endl;
+    cout<<"8.zavrsi"<<endl;
+
+    cin>>i;
+    return i;
+    }
 int main()
 {
-    
+    Rerna r;
+
+
+
+    do{
+       switch(meni()){
+    case 1:
+        if(r.pojacajTemp() == true){
+            cout<<"izvrseno"<<endl;
+        }
+        else{
+                cout<<"nije izvrseno"<<endl;
+       }
+       break;
+    case 2:
+        if(r.smanjiTemp() == true){
+            cout<<"izvrseno"<<endl;
+        }
+        else{
+                cout<<"nije izvrseno"<<endl;
+       }
+       break;
+    case 3:
+        if(r.ukljuci() == true){
+            cout<<"izvrseno"<<endl;
+        }
+        else{
+                cout<<"nije izvrseno"<<endl;
+       }
+       break;
+    case 4:
+        if(r.iskljuci() == true){
+            cout<<"izvrseno"<<endl;
+        }
+        else{
+                cout<<"nije izvrseno"<<endl;
+       }
+       break;
+       case 5:
+        if(r.popravi() == true){
+            cout<<"izvrseno"<<endl;
+        }
+        else{
+                cout<<"nije izvrseno"<<endl;
+       }
+       break;
+       case 6:
+       if(r.pokvari() == true){
+            cout<<"izvrseno"<<endl;
+        }
+        else{
+                cout<<"nije izvrseno"<<endl;
+       }
+       break;
+       case 7:
+           ispisiRernu(r);
+           break;
+       case 8:
+        cout<<"zavrseno"<<endl;
+        return 0;
+        break;
+       default:
+        cout<<"ne postoji"<<endl;
+        break;
+       }
+    }while(1);
+
+
     return 0;
+
+
 }
