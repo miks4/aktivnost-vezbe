@@ -1,0 +1,190 @@
+#include <iostream>
+
+using namespace std;
+enum TIP_PRELIVA{COKOLADNI = 1,COKOLADNI_SA_SLAGOM};
+enum STANJE_KOLACA{U_PRIPREMI = 1,PECE_SE,ZAGOREO,PRIPREMLJEN};
+class Preliv{
+private:
+    TIP_PRELIVA preliv;
+public:
+    Preliv(TIP_PRELIVA prelivv = COKOLADNI){
+        preliv = prelivv;
+    }
+    TIP_PRELIVA get_preliv()const{
+        return preliv;
+    }
+    void set_preliv(TIP_PRELIVA pr){
+        preliv = pr;
+    }
+    bool dodaj_slag(){
+        if(preliv == COKOLADNI){
+            preliv = COKOLADNI_SA_SLAGOM;
+            return true;
+        }
+        return false;
+    }
+    bool skini_slag(){
+        if(preliv == COKOLADNI_SA_SLAGOM){
+            preliv = COKOLADNI;
+            return true;
+        }
+      return false;
+    }
+
+};
+
+class Kolac{
+private:
+    STANJE_KOLACA stanje_kolac;
+    int temp_kolac;
+    Preliv preliv_kolac;
+public:
+    Kolac(){
+        stanje_kolac = U_PRIPREMI;
+        temp_kolac = 20;
+        preliv_kolac = COKOLADNI;
+    }
+    Kolac(const Kolac &kolac_za_kopiju){
+        stanje_kolac = kolac_za_kopiju.stanje_kolac;
+        temp_kolac = kolac_za_kopiju.temp_kolac;
+        preliv_kolac = kolac_za_kopiju.preliv_kolac;
+    }
+    string get_stanje_kolac()const{
+        string temp;
+        switch(stanje_kolac){
+        case 1:
+            temp = "u pripremi";
+            break;
+        case 2:
+            temp = "pece se";
+            break;
+        case 3:
+            temp = "zagoreo";
+            break;
+        case 4:
+            temp = "pripremljen";
+            break;
+        default:
+            temp = "ne postoji stanje";
+            break;
+        }
+        return temp;
+    }
+
+    int get_temp_kolac()const{
+        return temp_kolac;
+    }
+    void set_stanje_kolac(STANJE_KOLACA st){
+        stanje_kolac = st;
+    }
+    void set_temp_kolac(int temp){
+        temp_kolac = temp;
+    }
+
+
+
+    bool povecaj_temp(){
+        if(stanje_kolac == PECE_SE){
+            temp_kolac += 20;
+            if(temp_kolac > 100){
+                stanje_kolac = ZAGOREO;
+            }
+            if(temp_kolac > 39){
+                stanje_kolac = PRIPREMLJEN;
+
+            }
+            return true;
+        }
+        return false;
+    }
+
+    bool smanji_temp(){
+        if(stanje_kolac == PECE_SE){
+            temp_kolac -= 20;
+            if(temp_kolac == 0){
+                stanje_kolac = U_PRIPREMI;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    bool stavi_da_se_pece(){
+        if(preliv_kolac.get_preliv() == COKOLADNI){
+            povecaj_temp();
+            return true;
+        }
+        return false;
+    }
+    bool ispeci_kolac(){
+        if(stanje_kolac == PECE_SE){
+            stanje_kolac = U_PRIPREMI;
+            temp_kolac = 20;
+            return true;
+        }
+        return false;
+    }
+
+    bool zavrsi_kolac(){
+        if(stanje_kolac == U_PRIPREMI){
+            stanje_kolac = PRIPREMLJEN;
+            return true;
+        }
+        return false;
+    }
+
+    bool dodaj_slag(){
+        if(preliv_kolac.get_preliv() == COKOLADNI){
+            preliv_kolac = COKOLADNI_SA_SLAGOM;
+            return true;
+        }
+        return false;
+    }
+    bool skini_slag(){
+        if(preliv_kolac.get_preliv() == COKOLADNI_SA_SLAGOM && stanje_kolac == U_PRIPREMI){
+            preliv_kolac = COKOLADNI;
+            return true;
+        }
+      return false;
+    }
+
+
+};
+
+void ispisi_preliv(const Preliv &p){
+
+     int temp = p.get_preliv();
+    switch(temp){
+    case 1:
+        cout<<"preliv:cokoladni"<<endl;
+        break;
+    case 2:
+        cout<<"preliv:cokoladni sa slagom"<<endl;
+        break;
+    default:
+        cout<<"nema vrednosti"<<endl;
+        break;
+
+    }
+
+}
+
+void ispisi_kolac(const Kolac &k,const Preliv &p){
+    cout<<"==================="<<endl;
+    cout<<"-------------------"<<endl;
+    cout<<"stanje:"<<k.get_stanje_kolac()<<endl;
+    cout<<"temperatura:"<<k.get_temp_kolac()<<endl;
+    ispisi_preliv(p);
+    cout<<"-------------------"<<endl;
+}
+int main()
+{
+    Preliv p;
+    p.set_preliv(COKOLADNI);
+    cout<<"-------------------"<<endl;
+    ispisi_preliv(p);
+    cout<<"-------------------"<<endl;
+    Kolac k;
+    ispisi_kolac(k,p);
+    return 0;
+}
