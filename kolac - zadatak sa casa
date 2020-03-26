@@ -24,7 +24,7 @@ public:
         return false;
     }
     bool skini_slag(){
-        if(preliv == COKOLADNI_SA_SLAGOM){
+        if(preliv == COKOLADNI_SA_SLAGOM && U_PRIPREMI){
             preliv = COKOLADNI;
             return true;
         }
@@ -89,10 +89,6 @@ public:
             if(temp_kolac > 100){
                 stanje_kolac = ZAGOREO;
             }
-            if(temp_kolac > 39){
-                stanje_kolac = PRIPREMLJEN;
-
-            }
             return true;
         }
         return false;
@@ -111,6 +107,7 @@ public:
 
     bool stavi_da_se_pece(){
         if(preliv_kolac.get_preliv() == COKOLADNI){
+                stanje_kolac = PECE_SE;
             povecaj_temp();
             return true;
         }
@@ -133,28 +130,15 @@ public:
         return false;
     }
 
-    bool dodaj_slag(){
-        if(preliv_kolac.get_preliv() == COKOLADNI){
-            preliv_kolac = COKOLADNI_SA_SLAGOM;
-            return true;
-        }
-        return false;
-    }
-    bool skini_slag(){
-        if(preliv_kolac.get_preliv() == COKOLADNI_SA_SLAGOM && stanje_kolac == U_PRIPREMI){
-            preliv_kolac = COKOLADNI;
-            return true;
-        }
-      return false;
-    }
+   
 
 
 };
 
 void ispisi_preliv(const Preliv &p){
 
-     int temp = p.get_preliv();
-    switch(temp){
+
+    switch(p.get_preliv()){
     case 1:
         cout<<"preliv:cokoladni"<<endl;
         break;
@@ -170,21 +154,109 @@ void ispisi_preliv(const Preliv &p){
 }
 
 void ispisi_kolac(const Kolac &k,const Preliv &p){
-    cout<<"==================="<<endl;
     cout<<"-------------------"<<endl;
     cout<<"stanje:"<<k.get_stanje_kolac()<<endl;
     cout<<"temperatura:"<<k.get_temp_kolac()<<endl;
     ispisi_preliv(p);
     cout<<"-------------------"<<endl;
 }
+int meni(){
+    int i;
+    cout<<"1.povecaj temp"<<endl;
+    cout<<"2.smanji temp"<<endl;
+    cout<<"3.stavi da se pece"<<endl;
+    cout<<"4.ispeci kolac"<<endl;
+    cout<<"5.zavrsi kolac"<<endl;
+    cout<<"6.dodaj slag"<<endl;
+    cout<<"7.ukloni slag"<<endl;
+    cout<<"8.prikazi preliv"<<endl;
+    cout<<"9.prikazi kolac"<<endl;
+    cout<<"10.zavrsi"<<endl;
+    cin>>i;
+    return i;
+}
 int main()
 {
     Preliv p;
+    Preliv p1(p);
     p.set_preliv(COKOLADNI);
-    cout<<"-------------------"<<endl;
-    ispisi_preliv(p);
-    cout<<"-------------------"<<endl;
+
+    Kolac k1();
     Kolac k;
-    ispisi_kolac(k,p);
+
+    do{
+
+        switch(meni()){
+        case 1:
+            if(k.povecaj_temp() == true){
+                cout<<"operacija je izvrsena"<<endl;
+            }
+            else{
+                cout<<"operacija nije izvrsena"<<endl;
+            }
+            break;
+        case 2:
+            if(k.smanji_temp() == true){
+                cout<<"operacija je izvrsena"<<endl;
+            }
+            else{
+                cout<<"operacija nije izvrsena"<<endl;
+            }
+            break;
+        case 3:
+            if(k.stavi_da_se_pece() == true){
+                cout<<"operacija je izvrsena"<<endl;
+            }
+            else{
+                cout<<"operacija nije izvrsena"<<endl;
+            }
+            break;
+        case 4:
+            if(k.ispeci_kolac() == true){
+                cout<<"operacija je izvrsena"<<endl;
+            }
+            else{
+                cout<<"operacija nije izvrsena"<<endl;
+            }
+            break;
+        case 5:
+            if(k.zavrsi_kolac() == true){
+                cout<<"operacija je izvrsena"<<endl;
+            }
+            else{
+                cout<<"operacija nije izvrsena"<<endl;
+            }
+            break;
+        case 6:
+            if(p.dodaj_slag() == true){
+                cout<<"operacija je izvrsena"<<endl;
+            }
+            else{
+                cout<<"operacija nije izvrsena"<<endl;
+            }
+            break;
+        case 7:
+            if(p.skini_slag() == true){
+                cout<<"operacija je izvrsena"<<endl;
+            }
+            else{
+                cout<<"operacija nije izvrsena"<<endl;
+            }
+            break;
+        case 8:
+            cout<<"-------------------"<<endl;
+        ispisi_preliv(p);
+        cout<<"-------------------"<<endl;
+            break;
+        case 9:
+            ispisi_kolac(k,p);
+            break;
+        case 10:
+            return 0;
+        default:
+            cout<<"nema operacije"<<endl;
+            break;
+        }
+    }while(1);
     return 0;
 }
