@@ -80,6 +80,13 @@ public:
     void set_temp_kolac(int temp){
         temp_kolac = temp;
     }
+    void set_preliv(Preliv pp){
+        preliv_kolac.set_preliv(COKOLADNI);
+    }
+    Preliv get_preliv()const{
+        preliv_kolac.get_preliv();
+    }
+
 
 
 
@@ -129,8 +136,13 @@ public:
         }
         return false;
     }
+    bool dodaj_slaag(){
+        preliv_kolac.dodaj_slag();
+    }
+    bool ukloni_slaag(){
+        preliv_kolac.skini_slag();
+    }
 
-   
 
 
 };
@@ -153,11 +165,11 @@ void ispisi_preliv(const Preliv &p){
 
 }
 
-void ispisi_kolac(const Kolac &k,const Preliv &p){
+void ispisi_kolac(const Kolac &k){
     cout<<"-------------------"<<endl;
     cout<<"stanje:"<<k.get_stanje_kolac()<<endl;
     cout<<"temperatura:"<<k.get_temp_kolac()<<endl;
-    ispisi_preliv(p);
+    cout<<"preliv:"<<k.get_preliv()<<endl;
     cout<<"-------------------"<<endl;
 }
 int meni(){
@@ -228,7 +240,7 @@ int main()
             }
             break;
         case 6:
-            if(p.dodaj_slag() == true){
+            if(k.dodaj_slaag() == true){
                 cout<<"operacija je izvrsena"<<endl;
             }
             else{
@@ -236,7 +248,7 @@ int main()
             }
             break;
         case 7:
-            if(p.skini_slag() == true){
+            if(k.ukloni_slaag() == true){
                 cout<<"operacija je izvrsena"<<endl;
             }
             else{
@@ -249,7 +261,7 @@ int main()
         cout<<"-------------------"<<endl;
             break;
         case 9:
-            ispisi_kolac(k,p);
+            ispisi_kolac(k);
             break;
         case 10:
             return 0;
