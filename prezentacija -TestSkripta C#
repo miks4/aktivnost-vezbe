@@ -1,0 +1,44 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System.Threading;
+
+
+class EntryPoint
+    {
+    static IWebDriver driver = new ChromeDriver();
+    static IWebElement email;
+    static IWebElement password;
+    static IWebElement buttonLogIn;
+    static IWebElement buttonLogOut;
+    static IWebElement logOut;
+    static void Main()
+        {
+        
+        string url = "https://sr-rs.facebook.com/";
+        driver.Navigate().GoToUrl(url);
+        
+        email = driver.FindElement(By.Name("email"));
+        email.SendKeys("NECIJA EMAIL ADRES");
+        Thread.Sleep(3000);
+
+        password = driver.FindElement(By.Name("pass"));
+        password.SendKeys("PASSWORD");
+        Thread.Sleep(3000);
+
+        buttonLogIn = driver.FindElement(By.Id("u_0_b"));
+        buttonLogIn.Click();
+        Thread.Sleep(10000);
+
+        buttonLogOut = driver.FindElement(By.Id("userNavigationLabel"));
+        buttonLogOut.Click();
+        Thread.Sleep(5000);
+
+        logOut = driver.FindElement(By.PartialLinkText("Log Out"));
+        logOut.Click();
+        Thread.Sleep(5000);
+
+        
+
+        driver.Quit();
+        }
+    }
