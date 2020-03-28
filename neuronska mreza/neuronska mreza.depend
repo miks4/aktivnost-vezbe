@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1585425002 source:c:\users\win10\documents\github\aktivnost-vezbe\neuronska mreza\main.cpp
+	<iostream>
+	<cstdlib>
+	<time.h>
+
