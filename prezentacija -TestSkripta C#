@@ -1,6 +1,8 @@
+
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
+
 
 
 class EntryPoint
@@ -11,14 +13,24 @@ class EntryPoint
     static IWebElement buttonLogIn;
     static IWebElement buttonLogOut;
     static IWebElement logOut;
+    static IWebElement messagebutton;
+    static IWebElement newmessagebutton;
+    static IWebElement findname;
+    static IWebElement clickname;
+    static IWebElement sendmessage;
+    static IWebElement buttonsend;
+    static IWebElement closebutton;
     static void Main()
         {
         
         string url = "https://sr-rs.facebook.com/";
         driver.Navigate().GoToUrl(url);
-        
+
+        driver.Manage().Window.FullScreen();
+        Thread.Sleep(2000);
+
         email = driver.FindElement(By.Name("email"));
-        email.SendKeys("NECIJA EMAIL ADRES");
+        email.SendKeys("EMAIL");
         Thread.Sleep(3000);
 
         password = driver.FindElement(By.Name("pass"));
@@ -29,7 +41,35 @@ class EntryPoint
         buttonLogIn.Click();
         Thread.Sleep(10000);
 
-        buttonLogOut = driver.FindElement(By.Id("userNavigationLabel"));
+        messagebutton = driver.FindElement(By.Id("u_0_e"));
+        messagebutton.Click();
+        Thread.Sleep(2000);
+
+        newmessagebutton = driver.FindElement(By.PartialLinkText("New Message"));
+        newmessagebutton.Click();
+        Thread.Sleep(3000);
+
+        findname = driver.FindElement(By.ClassName("inputtext"));
+        findname.SendKeys("OSOBA KOJOJ IDE PORUKA");
+        Thread.Sleep(2000);
+
+        clickname = driver.FindElement(By.ClassName("text"));
+        clickname.Click();
+        Thread.Sleep(3000);
+
+        sendmessage = driver.FindElement(By.ClassName("_1mf"));
+        sendmessage.SendKeys("SAMA PORUKA");
+        Thread.Sleep(2000);
+
+        buttonsend = driver.FindElement(By.ClassName("_21u1"));
+        buttonsend.Click();
+        Thread.Sleep(2000);
+
+        closebutton = driver.FindElement(By.ClassName("close"));
+        closebutton.Click();
+        Thread.Sleep(2000);
+
+        buttonLogOut = driver.FindElement(By.Id("logoutMenu"));
         buttonLogOut.Click();
         Thread.Sleep(5000);
 
@@ -37,8 +77,10 @@ class EntryPoint
         logOut.Click();
         Thread.Sleep(5000);
 
-        
+        driver.Manage().Window.Minimize();
+        Thread.Sleep(2000);
 
         driver.Quit();
         }
     }
+
