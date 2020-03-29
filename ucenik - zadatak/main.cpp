@@ -149,10 +149,146 @@ public:
         }
         return false;
     }
+    bool polozi_god(){
+        if(pozicija == SKOLA && znanje > 60){
+                int i = knjizica.get_god();
+                double b = knjizica.get_prosek();
+            if(60 < znanje && znanje < 71){
+                b += 2 / 65;
+            }
+            if(70 < znanje && znanje < 81){
+                b += 3 / 65;
+            }
+            if(80 < znanje && znanje < 91){
+                b += 4 / 65;
+            }
+            if(90 < znanje && znanje < 101){
+                b += 5 / 65;
+            }
+            i += 1;
+            return true;
+        }
+        return false;
+    }
+    int stepen_o(){
+        int i = sk.get_obrazovanje();
+        int a = knjizica.get_god();
+        if(i == a){
+            return 1;
+        }
+        return 0;
+    }
+    bool maturiraj(){
+        int i = stepen_o();
+        if(pozicija == SKOLA && i == 1){
+            int a = rand()%5 + 1;
+            if(a > 1){
+                return true;
+            }
+        }
+        return false;
+    }
 
 };
+
+int meni(){
+    int i;
+    cout<<"1.idi kuci"<<endl;
+    cout<<"2.idi na trening"<<endl;
+    cout<<"3.idi u biblioteku"<<endl;
+    cout<<"4.idi u ucionucu"<<endl;
+    cout<<"5.spavaj"<<endl;
+    cout<<"6.uci"<<endl;
+    cout<<"7.treniraj"<<endl;
+    cout<<"8.polozi god"<<endl;
+    cout<<"9.maturiraj"<<endl;
+    cout<<"10.zavrsi"<<endl;
+    cin>>i;
+    return i;
+}
 int main()
 {
-
+    Ucenik u;
+    do{
+        switch(meni()){
+        case 1:
+            if(u.idi_kuci() == true){
+                cout<<"izvrseno"<<endl;
+            }
+            else{
+                cout<<"nije izvrseno"<<endl;
+            }
+            break;
+        case 2:
+            if(u.idi_na_trng() == true){
+                cout<<"izvrseno"<<endl;
+            }
+            else{
+                cout<<"nije izvrseno"<<endl;
+            }
+            break;
+        case 3:
+            if(u.idi_u_biblioteku() == true){
+                cout<<"izvrseno"<<endl;
+            }
+            else{
+                cout<<"nije izvrseno"<<endl;
+            }
+            break;
+        case 4:
+            if(u.idi_u_ucionica() == true){
+                cout<<"izvrseno"<<endl;
+            }
+            else{
+                cout<<"nije izvrseno"<<endl;
+            }
+            break;
+        case 5:
+            if(u.spavaj(7) == true){
+                cout<<"izvrseno"<<endl;
+            }
+            else{
+                cout<<"nije izvrseno"<<endl;
+            }
+            break;
+        case 6:
+            if(u.uci() == true){
+                cout<<"izvrseno"<<endl;
+            }
+            else{
+                cout<<"nije izvrseno"<<endl;
+            }
+            break;
+        case 7:
+            if(u.treniraj() == true){
+                cout<<"izvrseno"<<endl;
+            }
+            else{
+                cout<<"nije izvrseno"<<endl;
+            }
+            break;
+        case 8:
+            if(u.polozi_god() == true){
+                cout<<"izvrseno"<<endl;
+            }
+            else{
+                cout<<"nije izvrseno"<<endl;
+            }
+            break;
+        case 9:
+            if(u.maturiraj() == true){
+                cout<<"izvrseno"<<endl;
+            }
+            else{
+                cout<<"nije izvrseno"<<endl;
+            }
+            break;
+        case 10:
+            return 0;
+        default:
+            cout<<"ne postoji operacija";
+            break;
+        }
+    }while(1);
     return 0;
 }
