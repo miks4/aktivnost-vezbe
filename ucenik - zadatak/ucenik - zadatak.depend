@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1585604892 source:c:\users\win10\documents\github\aktivnost-vezbe\ucenik - zadatak\main.cpp
+	<iostream>
+	<cstdlib>
+

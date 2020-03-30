@@ -4,7 +4,7 @@
 using namespace std;
 enum VRSTA_SKOLE{STRUCNA = 1,GIMNAZIJA,UMETNICKA};
 enum STEPEN_OBRAZOVANJA{TRI_GOD = 1,CETIRI_GOD};
-enum POZICIJA{KOD_KUCE,SKOLA,TRENING,BIBLIOTEKA};
+enum POZICIJA{KOD_KUCE = 1,SKOLA,TRENING,BIBLIOTEKA};
 class DJackaKnjizica{
 private:
     int god;
@@ -90,6 +90,30 @@ public:
         vestina = kopija.vestina;
         znanje = kopija.znanje;
     }
+    STEPEN_OBRAZOVANJA get_obrazovanje()const{
+        return sk.get_obrazovanje();
+    }
+    VRSTA_SKOLE get_skola()const{
+        return sk.get_skola();
+    }
+    double get_prosek()const{
+        return knjizica.get_prosek();
+    }
+    int get_god()const{
+        return knjizica.get_god();
+    }
+    POZICIJA get_poz()const{
+        return pozicija;
+    }
+    int get_odmor()const{
+        return odmor;
+    }
+    int get_vestina()const{
+        return vestina;
+    }
+    int get_znanje()const{
+        return znanje;
+    }
     bool idi_kuci(){
         if(pozicija != KOD_KUCE){
         pozicija = KOD_KUCE;
@@ -119,8 +143,8 @@ public:
         return false;
     }
     bool spavaj(int satiSna){
-        if(odmor < 100){
-            odmor = satiSna*10;
+        if(odmor < 100 && pozicija == KOD_KUCE){
+            odmor += satiSna*10;
 
         if(odmor > 100){
             odmor = 100;
@@ -151,38 +175,39 @@ public:
     }
     bool polozi_god(){
         if(pozicija == SKOLA && znanje > 60){
-                int i = knjizica.get_god();
-                double b = knjizica.get_prosek();
-            if(60 < znanje && znanje < 71){
-                b += 2 / 65;
+
+            if(60 < znanje && znanje < 71 && knjizica.get_god() < 4){
+                knjizica.set_prosek(knjizica.get_prosek() + 2/65);
+                knjizica.set_god(knjizica.get_god()+1);
+                return true;
             }
-            if(70 < znanje && znanje < 81){
-                b += 3 / 65;
+            if(70 < znanje && znanje < 81 && knjizica.get_god() < 4){
+                 knjizica.set_prosek(knjizica.get_prosek() + 2/65);
+                 knjizica.set_god(knjizica.get_god()+1);
+                 return true;
             }
-            if(80 < znanje && znanje < 91){
-                b += 4 / 65;
+            if(80 < znanje && znanje < 91 && knjizica.get_god() < 4){
+                 knjizica.set_prosek(knjizica.get_prosek() + 2/65);
+                 knjizica.set_god(knjizica.get_god()+1);
+                 return true;
             }
-            if(90 < znanje && znanje < 101){
-                b += 5 / 65;
+            if(90 < znanje && znanje < 101 && knjizica.get_god() < 4){
+                 knjizica.set_prosek(knjizica.get_prosek() + 2/65);
+                 knjizica.set_god(knjizica.get_god()+1);
+                 return true;
             }
-            i += 1;
-            return true;
+
+
         }
         return false;
     }
-    int stepen_o(){
-        int i = sk.get_obrazovanje();
-        int a = knjizica.get_god();
-        if(i == a){
-            return 1;
-        }
-        return 0;
-    }
+
     bool maturiraj(){
-        int i = stepen_o();
-        if(pozicija == SKOLA && i == 1){
+
+        if(pozicija == SKOLA && sk.get_obrazovanje() == knjizica.get_god()){
             int a = rand()%5 + 1;
             if(a > 1){
+                    cout<<"polozio sa ocenom:"<<a<<endl;
                 return true;
             }
         }
@@ -190,7 +215,61 @@ public:
     }
 
 };
+void ispisi_ucenik(const Ucenik &u){
+    cout<<"godina:"<<u.get_god()<<endl;
+    cout<<"obrazovanje:";
+    switch(u.get_obrazovanje()){
+    case 1:
+        cout<<"trogodisnje"<<endl;
+        break;
+    case 2:
+        cout<<"cetvorogodisnje"<<endl;
+        break;
+    default:
+        cout<<""<<endl;
+        break;
+    }
+    cout<<"prosek:"<<u.get_prosek()<<endl;
+    cout<<"skola:";
+    switch(u.get_skola()){
+    case 1:
+        cout<<"strucna"<<endl;
+        break;
+    case 2:
+        cout<<"gimnazija"<<endl;
+        break;
+    case 3:
+        cout<<"umetnicja"<<endl;
+        break;
+    default:
+        cout<<""<<endl;
+        break;
+    }
+    cout<<"odmor:"<<u.get_odmor()<<endl;
+    cout<<"vestina:"<<u.get_vestina()<<endl;
+    cout<<"znanje:"<<u.get_znanje()<<endl;
+    cout<<"pozicija:";
+    switch(u.get_poz()){
+    case 1:
+        cout<<"kod kuce"<<endl;
+        break;
+    case 2:
+        cout<<"skola"<<endl;
+        break;
+    case 3:
+        cout<<"trening"<<endl;
+        break;
+    case 4:
+        cout<<"biblioteka"<<endl;
+        break;
+    default:
+        cout<<""<<endl;
+        break;
 
+        }
+        cout<<"============"<<endl;
+
+}
 int meni(){
     int i;
     cout<<"1.idi kuci"<<endl;
@@ -202,7 +281,8 @@ int meni(){
     cout<<"7.treniraj"<<endl;
     cout<<"8.polozi god"<<endl;
     cout<<"9.maturiraj"<<endl;
-    cout<<"10.zavrsi"<<endl;
+    cout<<"10.vidi ucenika"<<endl;
+    cout<<"11.zavrsi"<<endl;
     cin>>i;
     return i;
 }
@@ -284,6 +364,9 @@ int main()
             }
             break;
         case 10:
+            ispisi_ucenik(u);
+            break;
+        case 11:
             return 0;
         default:
             cout<<"ne postoji operacija";
