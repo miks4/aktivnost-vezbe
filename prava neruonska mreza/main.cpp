@@ -10,6 +10,10 @@ private:
     int brSkrivenihSlojeva;
     int brNeuronaPoSloju;
 public:
+    NeuronsskaMreza(){
+        brSkrivenihSlojeva = 0;
+        brNeuronaPoSloju = 0;
+    }
         NeuronsskaMreza(int bss,int bnps){
             if(bss<0){
                 brSkrivenihSlojeva = 0;
@@ -46,7 +50,7 @@ public:
             brNeuronaPoSloju += 1;
             cout<<"br, neurona po sloju:"<<brNeuronaPoSloju<<endl;
         }
-        double Izracunaj_uspeh(){
+        double Izracunaj_uspeh()const{
             double uspeh = 1 + 1/log(brSkrivenihSlojeva * brNeuronaPoSloju);
            return uspeh;
         }
@@ -59,6 +63,11 @@ private:
     int brOptimizacija;
     STANJE_TESTA stanje;
 public:
+    Test(){
+        zeljeniProcenatUspesnosti = 0.85;
+        brOptimizacija = 0;
+        stanje = START;
+    }
     Test(int zpu,int bo,STANJE_TESTA st,int bs,int bn) : nm(3,200){
         stanje = st;
         brOptimizacija = bo;
@@ -116,7 +125,7 @@ public:
             return true;
         }
     }
-    double izracunajUspeh(){
+    double izracunajUspeh()const{
         return nm.Izracunaj_uspeh();
     }
 
@@ -158,7 +167,8 @@ int meni(){
     cout<<"1.procesiraj"<<endl;
     cout<<"2.potrebno optimizovati"<<endl;
     cout<<"3.optimizuj"<<endl;
-    cout<<"4.kraj"<<endl;
+    cout<<"4.vidi test"<<endl;
+    cout<<"5.kraj"<<endl;
     cin>>i;
     return i;
 }
@@ -172,7 +182,7 @@ int main()
                 cout<<"izvrseno"<<endl;
             }
             else{
-                cout<<"nije izvrseni";
+                cout<<"nije izvrseni"<<endl;
             }
             break;
         case 2:
@@ -180,7 +190,7 @@ int main()
                 cout<<"izvrseno"<<endl;
             }
             else{
-                cout<<"nije izvrseni";
+                cout<<"nije izvrseni"<<endl;
             }
             break;
         case 3:
@@ -188,11 +198,13 @@ int main()
                 cout<<"izvrseno"<<endl;
             }
             else{
-                cout<<"nije izvrseni";
+                cout<<"nije izvrseni"<<endl;
             }
             break;
         case 4:
             ispisiTest(t);
+            break;
+        case 5:
             return 0;
         default:
             break;
