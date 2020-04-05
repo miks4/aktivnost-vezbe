@@ -40,7 +40,7 @@ public:
 class Pravougaonik : public Figura{
     public:
     Pravougaonik() : Figura(3,4){}
-    Pravougaonik(double aa,double bb) : Figura(aa,bb){}
+    Pravougaonik(double aa,double bb,int ii) : Figura(aa,bb){}
     Pravougaonik(const Pravougaonik &kopija) : Figura(kopija.a,kopija.b){}
     void izracunaj_povrsinu(){
         double p = a *b;
@@ -69,7 +69,8 @@ public:
         double y = b/2;
         double pi = 3.14;
         double o = pi *((3*x + 3*y) - sqrt((3*x + y)*(x + 3*y)));
-        cout<<"obim elipse:"<<o<<endl;    }
+        cout<<"obim elipse:"<<o<<endl;
+           }
 };
 class Oblik{
 protected:
@@ -77,26 +78,31 @@ protected:
     Elipsa b;
 public:
     Oblik() : a(3,4),b(3,4){}
-    Oblik(int a,int b,int c,int d) : a(3,4) , b(3,4){}
-    Oblik(const Oblik &kopija) : a(kopija.a,kopija.b) , b(kopija.a,kopija.b){}
+    Oblik(int aa,int bb,int cc,int dd) : a(aa,bb) , b(cc,dd){}
+    Oblik(const Oblik &kopija) : a(kopija.a.get_A(),kopija.a.get_b()) , b(kopija.b.get_A(),kopija.b.get_b()){}
+
     void povrsina(){
-        cout<<"povrsina oblika je:"<<a*b<<endl;
+        double p = a.get_A() * a.get_b();
+        cout<<"povrsina oblika je:"<<p<<endl;
     }
     void obimm(){
-        cout<<"obim oblika je:"<<a+b<<endl;
+        double p = a.get_A() + a.get_b();
+        cout<<"obim oblika je:"<<p<<endl;
     }
 };
 
 class PravilanOblik : public Oblik{
 public:
-    PravilanOblik() : Oblik(3,3){}
-    PravilanOblik(int aa) : Oblik(a){}
-    PravilanOblik(const PravilanOblik &po) : Oblik(cp.a,cp.a){}
+    PravilanOblik() : Oblik(3,3,3,3){}
+    PravilanOblik(int aa) : Oblik(aa,aa,aa,aa){}
+    PravilanOblik(const PravilanOblik &po) : Oblik(po.a.get_A(),po.a.get_b(),po.b.get_A(),po.b.get_b()){}
     void povrsina(){
-        cout<<"povrsina pravilnog oblika je:"<<a*a<<endl;
+        double p = a.get_A() * a.get_b();
+        cout<<"povrsina pravilnog oblika je:"<<p<<endl;
     }
     void obimm(){
-        cout<<"obim pravilnog oblika:"<<a+a<<endl;
+        double p = a.get_A() + a.get_b();
+        cout<<"obim pravilnog oblika:"<<p<<endl;
     }
 };
 int main()
@@ -105,12 +111,15 @@ int main()
     Pravougaonik pr;
     pr.izracunaj_povrsinu();
     pr.obim();
+
     Elipsa e;
     e.izracunaj_povrsinu();
     e.obim();
+
     Oblik o;
     o.povrsina();
     o.obimm();
+
     PravilanOblik po;
     po.povrsina();
     po.obimm();
