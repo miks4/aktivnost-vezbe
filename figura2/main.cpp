@@ -149,6 +149,54 @@ public:
         return o;
     }
 };
+class Oblik{
+private:
+    Krug q;
+    Kvadrat k;
+    double a;
+    double r;
+public:
+    Oblik(){
+        a = q.get_a();
+        r = a;
+    }
+    Oblik(double aa,double rr){
+        a = aa;
+        r = rr;
+    }
+    Oblik(const Oblik &kopija){
+        a = kopija.a;
+        r = kopija.r;
+    }
+    void set_a(const double aa){
+        a = aa;
+    }
+    void set_r(const double rr){
+        r = rr;
+    }
+    double get_a()const{
+        return a;
+    }
+    double get_r()const{
+        return r;
+    }
+    double povrsina_kvadra_u_obliku(){
+            double p = a * a;
+            return p;
+    }
+    double povrsina_kruga_u_obliku(){
+        double p = r * r * 3.14;
+        return p;
+    }
+    double obim_kvadraUObliku(){
+        double o = 4 * a;
+        return o;
+    }
+    double Obim_KrugaUObliku(){
+        double o = 2 * r * 3.14;
+        return o;
+    }
+};
 int main()
 {
     Figura f;
@@ -186,7 +234,7 @@ int main()
     Krug q3(q2);
     Krug q;
     cout<<"KRUG"<<endl;
-    cout<<"poluprecnik:"<<q.get_r()<<endl;
+    cout<<"precnik:"<<q.get_r()<<endl;
     cout<<"povrsina:"<<q.povrsina()<<endl;
     cout<<"obim:"<<q.obim()<<endl;
 
@@ -202,6 +250,21 @@ int main()
     cout<<"obim:"<<k.obim()<<endl;
 
     cout<<"=================="<<endl;
+
+    Oblik o1();
+    Oblik o2(3,3);
+    Oblik o3(o2);
+    Oblik o;
+    cout<<"OBLIK"<<endl;
+    cout<<"stranica"<<o.get_a()<<endl;
+    cout<<"precnik"<<o.get_r()<<endl;
+    o.set_a(3);
+    o.set_r(3);
+    cout<<"povrsina kvadra u obliku"<<o.povrsina_kvadra_u_obliku()<<endl;
+    cout<<"povrsina kruga u obliku"<<o.povrsina_kruga_u_obliku()<<endl;
+    cout<<"obim kvadra u obliku"<<o.obim_kvadraUObliku()<<endl;
+    cout<<"obim kruga u obliku"<<o.Obim_KrugaUObliku()<<endl;
+
 
     return 0;
 }
