@@ -63,7 +63,7 @@ private:
     int brOptimizacija;
     STANJE_TESTA stanje;
 public:
-    Test(){
+    Test() : nm(3,200){
         zeljeniProcenatUspesnosti = 0.85;
         brOptimizacija = 0;
         stanje = START;

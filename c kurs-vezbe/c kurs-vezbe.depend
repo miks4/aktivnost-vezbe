@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1586360473 source:c:\users\win10\documents\github\aktivnost-vezbe\c kurs-vezbe\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

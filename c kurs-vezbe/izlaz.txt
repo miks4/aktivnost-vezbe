@@ -1,0 +1,2 @@
+23 srb ns capricoza
+avg=23.00
