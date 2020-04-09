@@ -28,7 +28,7 @@ public:
         b = kopija.b;
         c = kopija.c;
     }
-    ///~Kvadar();
+    ~Kvadar(){};
     float get_a()const{
         return a;
     }
@@ -68,7 +68,7 @@ public:
         d = kopija.d;
         h = kopija.h;
     }
-    ///~Piramida();
+    ~Piramida(){};
     float get_d()const{
         return d;
     }
@@ -93,7 +93,7 @@ public:
     Kocka() : Kvadar(3,3,3){}
     Kocka(float a) : Kvadar(a,a,a){}
     Kocka(const Kocka &kopija) : Kvadar(kopija){}
-    ///~Kocka();
+    ~Kocka(){}
     float povrsina(){
         float p = a * a * 6;
         return p;
@@ -112,7 +112,7 @@ public:
     JSPiramida() : Piramida(4,4){}
     JSPiramida(float d,float h) : Piramida(d,h){}
     JSPiramida(const JSPiramida &kopija) : Piramida(kopija){}
-    ///~JSPiramida();
+    ~JSPiramida(){}
     float povrsina(){
         float p = d * d + 2 * h;
         return p;
@@ -134,7 +134,7 @@ public:
     SpecTelo() : k() , jp(){}
     SpecTelo(float strKocke,float stranicaP,float visinaP) : k(strKocke) , jp(stranicaP,visinaP){}
     SpecTelo(const SpecTelo &kopija) : k(kopija.k),jp(kopija.jp){}
-    ///~SpecTelo();
+    ~SpecTelo(){}
     float povrsina(){
         float p = k.povrsina() + 2 * jp.povrsina();
         return p;
