@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1586719491 source:c:\users\win10\documents\github\aktivnost-vezbe\razlika predmeta\main.c
+	<stdio.h>
+	<stdlib.h>
+
