@@ -1,37 +1,17 @@
 #include <iostream>
-
+#include "dinString.hpp"
 using namespace std;
-class DinString{
-private:
-    int duzina;
-    char *text;
-public:
-    DinString();
-    DinString(const char[]);
-    DinString(const DinString &);
-    ~DinString(){}
 
-    int lenght() const;
-
-    char& operator[] (int);
-    char operator[] (int)const;
-
-    DinString operator=(const DinString&);
-    DinString operator+=(const DinString&);
-
-    friend bool operator==(const DinString&,const DinString&);
-    friend bool operator!=(const DinString&,const DinString&);
-
-    friend DinString operator+(const DinString&,const DinString&);
-
-    friend ostream& operator<<(ostream&,const DinString);
-};
 class Osoba{
 protected:
     DinString ime,prezime;
 public:
     Osoba(const char* ime1 = "milos",const char* prezime1 = "milosevic") : ime(ime1) , prezime(prezime1){}
     Osoba(const DinString &pime1,const DinString &pprezime1) : ime(pime1) , prezime(pprezime1){}
+    Osoba(DinString &imee){
+        ime = imee;
+        prezime = prezime;
+    }
     Osoba(const Osoba &kopija){
         ime = kopija.ime;
         prezime = kopija.prezime;
@@ -39,6 +19,7 @@ public:
     void ispis()const{
         cout<<"ime:"<<ime<<endl<<"prezime:"<<prezime<<endl;
     }
+
 };
 class Student : public Osoba{
 protected:
@@ -81,8 +62,7 @@ public:
 };
 int main()
 {
-    const char *ime1;
-    const char *prezime1;
+
 
 
 
