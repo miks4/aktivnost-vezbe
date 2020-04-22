@@ -16,7 +16,7 @@ class Kamera{
         Kamera(int mp,int fp,int pc){
             megaPiksel = mp;
             freeSpace = fp;
-            photoCounter = pc;
+
         }
         Kamera(const Kamera &kopija){
             megaPiksel = kopija.megaPiksel;
@@ -111,7 +111,7 @@ public:
 };
 int main()
 {
-
+    Kamera k();
 
     return 0;
 }
