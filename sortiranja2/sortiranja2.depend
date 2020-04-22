@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1587585330 source:c:\users\win10\documents\github\aktivnost-vezbe\sortiranja2\main.c
+	<stdio.h>
+	<stdlib.h>
+
