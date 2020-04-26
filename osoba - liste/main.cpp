@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <list>
+
+#include "dinstring.hpp"
 using namespace std;
 
 
@@ -177,13 +179,13 @@ void List<T>::clear() {
 }
 class Osoba{
 protected:
-    string ime,prezime;
+    DinString ime,prezime;
 public:
     Osoba(){
         ime = "milos";
         prezime = "mrdja";
     }
-    Osoba(string imee,string pre){
+    Osoba(DinString imee,DinString pre){
         ime = imee;
         prezime = pre;
     }
@@ -202,7 +204,7 @@ public:
     Student() : Osoba("milos","mrdja") {
         brIndeksa = 123;
     }
-    Student(string imee,string pre,int br) : Osoba(imee,pre){
+    Student(DinString imee,DinString pre,int br) : Osoba(imee,pre){
         brIndeksa = br;
     }
     Student(const Student &kopija) : Osoba(kopija.ime,kopija.prezime){
@@ -215,12 +217,12 @@ public:
 };
 class Profa : public Student{
 protected:
-    string predmet;
+    DinString predmet;
 public:
     Profa() : Student("milos","mrdja",123){
         predmet = "mata";
     }
-    Profa(string imee,string pre,string pred,int br) : Student(imee,pre,br){
+    Profa(DinString imee,DinString pre,int br,DinString pred) : Student(imee,pre,br){
         predmet = pred;
     }
     Profa(const Profa &kopija) : Student(kopija.ime, kopija.prezime, kopija.brIndeksa){
@@ -234,14 +236,14 @@ public:
 class Ucionica{
 protected:
     List <Osoba> osobe;
-    string naziv;
+    DinString naziv;
     int brMesta;
 public:
     Ucionica(){
         naziv = "ucionica";
         brMesta = 30;
     }
-    Ucionica(string a,int br){
+    Ucionica(DinString a,int br){
         naziv = a;
         brMesta = br;
     }
@@ -262,7 +264,7 @@ public:
         else{
             Osoba os;
             cout<<"u ucionici su:"<<endl;
-            for(int i = 1;i < osobe.size();i++){
+            for(int i = 1;i <= osobe.size();i++){
                 osobe.read(i,os);
                 os.ispis();
             }
@@ -271,7 +273,7 @@ public:
 };
 
 int main()
-{   List<Osoba> oso;
+{   List<DinString> dinl;
     Osoba o;
     Student st;
     Profa p;
@@ -279,15 +281,51 @@ int main()
     o.ispis();
     cout<<"\npodaci studenta:"<<endl;
     st.ispis();
-    cout<<"\npodaci profesora:"<<endl;
+    cout<<"\npodaci profesora:\n"<<endl;
     p.ispis();
-    Ucionica u;
-    u.dodajOsobu(o);
-    Ucionica uu;
-    for(int i = 1; i < oso.size();i++){
-        oso.read(i,oso);
-        cout<<"na poziciji "<<i<<"jeste:"<<oso<<endl;
+    cout<<"======================="<<endl;
+
+    DinString ds1("milos1");
+    DinString ds2("milos2");
+    DinString ds3("milos3");
+    DinString ds4("milos4");
+    DinString ds5("milos5");
+
+    dinl.add(1,ds1);
+    dinl.add(2,ds2);
+    dinl.add(3,ds3);
+    dinl.add(4,ds4);
+    dinl.add(5,ds5);
+    cout<<dinl;
+    DinString ds;
+
+    for(int i = 1; i <= dinl.size();i++){
+        dinl.read(i,ds);
+        cout<<"na poziciji "<<i<<"\tjeste:"<<ds<<endl;
     }
+    cout<<"duzina liste:"<<dinl.size()<<endl;
+    cout<<"sledi ciscenje liste"<<endl;
+    dinl.clear();
+    cout<<"duzina liste:"<<dinl.size()<<endl;
+    cout<<"========================="<<endl;
+    Ucionica u;
+    Osoba o1;
+    Student st1;
+    Student st2("marko" , "markovic", 123);
+    Student st3("ilija" , "milojevic",124);
+    Student st4("aco" , "krecar" , 1235);
+    Student st5("milorad" , "mazic",2134);
+    Profa p1("doktor" ,"sam", 2222,"mate");
+    u.dodajOsobu(o1);
+    u.dodajOsobu(st1);
+    u.dodajOsobu(st2);
+    u.dodajOsobu(st3);
+    u.dodajOsobu(st4);
+    u.dodajOsobu(st5);
+    u.dodajOsobu(p1);
+    u.ispis();
+
+
 
     return 0;
 }

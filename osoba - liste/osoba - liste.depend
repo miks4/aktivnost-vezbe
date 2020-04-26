@@ -1,3 +1,13 @@
 # depslib dependency file v1.0
-1587909519 source:c:\users\win10\documents\github\aktivnost-vezbe\list.hpp\main.cpp
+1587926236 source:c:\users\win10\documents\github\aktivnost-vezbe\osoba - liste\dinstring.cpp
+	"dinstring.hpp"
+
+1587926236 c:\users\win10\documents\github\aktivnost-vezbe\osoba - liste\dinstring.hpp
+	<iostream>
+
+1587928106 source:c:\users\win10\documents\github\aktivnost-vezbe\osoba - liste\main.cpp
+	<iostream>
+	<stdlib.h>
+	<list>
+	"dinstring.hpp"
 
