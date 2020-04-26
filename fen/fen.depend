@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1587915508 source:c:\users\win10\documents\github\aktivnost-vezbe\fen\dinstring.cpp
+	"dinstring.hpp"
+
+1587915508 c:\users\win10\documents\github\aktivnost-vezbe\fen\dinstring.hpp
+	<iostream>
+
+1587917418 source:c:\users\win10\documents\github\aktivnost-vezbe\fen\main.cpp
+	<iostream>
+	"dinstring.hpp"
+
